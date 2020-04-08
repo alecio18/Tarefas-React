@@ -6,8 +6,9 @@ import moment from 'moment'
 
 export default props => {
     const linhas = () => {
-        const lista = props.lista || []
-        return lista.map(tarefa => (
+        const lista = props.lista || [] 
+        
+        return lista.map(tarefa => (            
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
                 <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>
@@ -27,7 +28,7 @@ export default props => {
         ))
     }
 
-    return (
+    return (         
         <table className='table'>
             <thead>
                 <tr>

@@ -5,6 +5,8 @@ import PageHeader from '../template/pageHeader'
 import TarefasForm from './tarefasForm'
 import TarefasLista from './tarefasLista'
 
+import Grid from  '../template/grid'
+
 const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 
 export default class Tarefas extends Component {
@@ -22,9 +24,9 @@ export default class Tarefas extends Component {
         this.pendente = this.pendente.bind(this)
 
         this.pesquisar = this.pesquisar.bind(this)
-        this.limpar = this.limpar.bind(this)
+        this.limpar = this.limpar.bind(this)        
 
-        this.atualizar()
+        this.atualizar()        
     }
 
     atualizar(descricao = '') {
@@ -89,22 +91,53 @@ export default class Tarefas extends Component {
         this.atualizar()
     }
 
-    render() {
+    concluidosTotal(){        
+
+         /* tarefas concluidas percentagem */
+
+         let contConcluidas = 0
+
+         Object.entries(this.state.lista).forEach(([chave, valor]) => {
+             if(valor.completo === true){
+                 contConcluidas += 1
+             }
+         })        
+         
+         const totalConcluido = ((contConcluidas * 100)/this.state.lista.length)
+         
+         /** final da porcentagem */ 
+
         return (
-            <div>
-                <PageHeader nome='Tarefas' small ='Cadastro' />
-                <TarefasForm descricao = {this.state.descricao}
-                adicionar={this.adicionar}
-                alterar={this.alterar} 
-                pesquisar = { this.pesquisar }
-                limpar = { this.limpar }
-                />
-                <TarefasLista lista = { this.state.lista }
-                              remover = { this.remover } 
-                              pendente = { this.pendente }
-                              concluido = { this.concluido }                              
-                />
-            </div>
+            totalConcluido.toFixed(2) + ' % '
         )
+
+    }
+ 
+
+    render() {
+        return ( 
+                <div>                           
+                    
+                    <PageHeader nome='Tarefas' small ='Cadastro' total={this.concluidosTotal()}/>
+                    
+                    <div className='col-xs-12'>
+                    <br />
+                        <TarefasForm descricao = {this.state.descricao}
+                            adicionar={this.adicionar}
+                            alterar={this.alterar} 
+                            pesquisar = { this.pesquisar }
+                            limpar = { this.limpar }   
+                        />
+                    </div>                    
+                    <TarefasLista lista = { this.state.lista }
+                                    remover = { this.remover } 
+                                    pendente = { this.pendente }
+                                    concluido = { this.concluido }                              
+                    />
+                </div>
+        )
+               
+           
+        
     }
 }

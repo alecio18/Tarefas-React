@@ -35,6 +35,8 @@ export default props => {
             
             {//<div className='col-xs-12 col-sm-3 col-md-2'>
             } 
+
+            <br />
                 
                 <Botao style='primary' icon='plus' onClick={props.adicionar} />
                 <Botao style='info' icon='search'
