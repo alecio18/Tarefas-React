@@ -5,7 +5,6 @@ import PageHeader from '../template/pageHeader'
 import TarefasForm from './tarefasForm'
 import TarefasLista from './tarefasLista'
 
-import Grid from  '../template/grid'
 
 const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 
@@ -97,7 +96,7 @@ export default class Tarefas extends Component {
 
          let contConcluidas = 0
 
-         Object.entries(this.state.lista).forEach(([chave, valor]) => {
+         Object.entries(this.state.lista).forEach(([, valor]) => {
              if(valor.completo === true){
                  contConcluidas += 1
              }
@@ -111,6 +110,19 @@ export default class Tarefas extends Component {
             totalConcluido.toFixed(2) + ' % '
         )
 
+    }
+
+    listaNaoConcluida(){
+        
+        const lista = []
+        
+        Object.entries(this.state.lista).forEach(([, valor]) => {
+            if(valor.completo === false){
+                lista.push(valor)
+            }
+        })
+        return lista       
+        
     }
  
 
@@ -129,7 +141,7 @@ export default class Tarefas extends Component {
                             limpar = { this.limpar }   
                         />
                     </div>                    
-                    <TarefasLista lista = { this.state.lista }
+                    <TarefasLista lista = { this.listaNaoConcluida() }
                                     remover = { this.remover } 
                                     pendente = { this.pendente }
                                     concluido = { this.concluido }                              
