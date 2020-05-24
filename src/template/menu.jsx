@@ -14,6 +14,8 @@ export default props => (
                 <ul className='nav navbar-nav'>
                     <li><a href='#/tarefas'>Tarefas</a></li>
                     <li><a href='#/concluidas'>Tarefas Concluídas</a></li>
+                    <li><a href='#/series'>Series</a></li>
+                    <li><a href='#/seriesConcluidas'>Series Concluídas</a></li>
                     <li><a href='#/sobre'>Sobre</a></li>                    
                 </ul>
             </div>

@@ -1,23 +1,31 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import TarefasConcluidas from './tarefasConcluidas'
+import PageHeader from '../template/pageHeader'
+import SeriesForm from './seriesForm'
+import SeriesLista from './seriesLista'
 
 
 const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
+
 //const URL = 'http://localhost:4010/api/tarefas'
 
-
-export default class Tarefas extends Component {
+export default class Series extends Component {
     
     //amarrando this para o componente
 
     constructor(props) {
         super(props)
         this.state = { descricao: '', lista: [] }
-         
+        
+        this.adicionar = this.adicionar.bind(this)
+        this.alterar = this.alterar.bind(this)
+        this.remover = this.remover.bind(this)
         this.concluido = this.concluido.bind(this)
-        this.pendente = this.pendente.bind(this)          
+        this.pendente = this.pendente.bind(this)
+
+        this.pesquisar = this.pesquisar.bind(this)
+        this.limpar = this.limpar.bind(this)        
 
         this.atualizar()        
     }
@@ -41,7 +49,8 @@ export default class Tarefas extends Component {
     
     adicionar() {
        const descricao = this.state.descricao
-        axios.post(URL, { descricao })
+       const tipo = 'serie'
+        axios.post(URL, { descricao, tipo })
             .then(resp => this.atualizar())
             .catch((e) => {
                 if(e == 'Error: Network Error'){
@@ -84,10 +93,59 @@ export default class Tarefas extends Component {
         this.atualizar()
     }
 
+    concluidosTotal(){        
+
+         /* tarefas concluidas percentagem */
+
+         let contConcluidas = 0
+
+         Object.entries(this.state.lista).forEach(([, valor]) => {
+             if(valor.completo === true){
+                 contConcluidas += 1
+             }
+         })        
+         
+         const totalConcluido = ((contConcluidas * 100)/this.state.lista.length)
+         
+         /** final da porcentagem */ 
+
+        return (
+            totalConcluido.toFixed(2) + ' % '
+        )
+
+    }
+
+    listaNaoConcluida(){
+        
+        const lista = []
+        
+        Object.entries(this.state.lista).forEach(([, valor]) => {
+            if(valor.completo === false){
+                lista.push(valor)
+            }
+        })
+        return lista       
+        
+    }
+ 
+
     render() {
         return ( 
-                <div>           
-                    <TarefasConcluidas lista = { this.state.lista }                                     
+                <div>                           
+                    
+                    <PageHeader nome='Series' small ='Cadastro' total={this.concluidosTotal()}/>
+                    
+                    <div className='col-xs-12'>
+                    <br />
+                        <SeriesForm descricao = {this.state.descricao}
+                            adicionar={this.adicionar}
+                            alterar={this.alterar} 
+                            pesquisar = { this.pesquisar }
+                            limpar = { this.limpar }   
+                        />
+                    </div>                    
+                    <SeriesLista lista = { this.listaNaoConcluida() }
+                                    remover = { this.remover } 
                                     pendente = { this.pendente }
                                     concluido = { this.concluido }                              
                     />

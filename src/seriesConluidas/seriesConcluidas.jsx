@@ -5,14 +5,18 @@ import moment from 'moment'
 
 
 export default props => {
-    const linhas = () => {
-        const lista = props.lista || []       
+    const linhas = () => {      
+
+        const lista = props.lista || []        
+       
         
-        const tarefasLista = lista.filter((tarefas)=> {
-            return tarefas.tipo === ''
+        const listaFiltrada = lista.filter((finalizado) => {
+            return finalizado.completo === true && finalizado.tipo === 'serie'
         })
 
-        return tarefasLista.map(tarefa => (            
+        return listaFiltrada.map(tarefa => (             
+            
+            
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
                 <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>
@@ -23,10 +27,8 @@ export default props => {
                         onClick={() => props.concluido(tarefa)} />
                    
                     <Botao style='warning' icon='undo' hide={!tarefa.completo}
-                        onClick={() => props.pendente(tarefa)} />
-                    
-                    <Botao style='danger' icon='trash-o'
-                        onClick={() => props.remover(tarefa)} />
+                        onClick={() => props.pendente(tarefa)} />                    
+                   
                 </td>
             </tr>
         ))

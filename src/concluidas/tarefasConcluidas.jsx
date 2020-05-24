@@ -11,7 +11,7 @@ export default props => {
        
         
         const listaFiltrada = lista.filter((finalizado) => {
-            return finalizado.completo === true
+            return finalizado.completo === true & finalizado.tipo === ''
         })
 
         return listaFiltrada.map(tarefa => (             

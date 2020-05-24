@@ -6,13 +6,13 @@ import moment from 'moment'
 
 export default props => {
     const linhas = () => {
-        const lista = props.lista || []       
-        
-        const tarefasLista = lista.filter((tarefas)=> {
-            return tarefas.tipo === ''
-        })
+        const lista = props.lista || [] 
 
-        return tarefasLista.map(tarefa => (            
+        const seriesFiltradas = lista.filter((series) => {
+            return series.tipo === 'serie'
+        })
+        
+        return seriesFiltradas.map(tarefa => (            
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
                 <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>

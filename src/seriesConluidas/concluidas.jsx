@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import TarefasConcluidas from './tarefasConcluidas'
+import SeriesConcluidas from './seriesConcluidas'
 
 
 const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 //const URL = 'http://localhost:4010/api/tarefas'
 
 
-export default class Tarefas extends Component {
+export default class Series extends Component {
     
     //amarrando this para o componente
 
     constructor(props) {
         super(props)
-        this.state = { descricao: '', lista: [] }
-         
+        this.state = { descricao: '', lista: [] } 
+
         this.concluido = this.concluido.bind(this)
-        this.pendente = this.pendente.bind(this)          
+        this.pendente = this.pendente.bind(this)       
 
         this.atualizar()        
     }
@@ -37,33 +37,8 @@ export default class Tarefas extends Component {
                 console.log(e)
             }
         })
-    }
+    }    
     
-    adicionar() {
-       const descricao = this.state.descricao
-        axios.post(URL, { descricao })
-            .then(resp => this.atualizar())
-            .catch((e) => {
-                if(e == 'Error: Network Error'){
-                    console.log('Sem conexão com o Back')
-                }else
-                console.log( e )
-            })
-    }
-
-    alterar(evento){
-        //this.state.descricao = evento
-
-        this.setState({ ...this.state, descricao: evento.target.value })
-    } 
-
-    remover(tarefa){
-        axios.delete(`${URL}/${tarefa._id}`)
-            .then(resp => this.atualizar(this.state.descricao))
-            .catch((e) => {
-                console.log('Operação NÃO realizada : ' + e )
-            })
-    }
     pendente(tarefa){
         axios.put(`${URL}/${tarefa._id}`, { ...tarefa, completo: false})
             .then(resp => this.atualizar(this.state.descricao))
@@ -76,18 +51,10 @@ export default class Tarefas extends Component {
         
     }
 
-    pesquisar(){
-        this.atualizar(this.state.descricao)
-    }
-
-    limpar(){        
-        this.atualizar()
-    }
-
     render() {
         return ( 
                 <div>           
-                    <TarefasConcluidas lista = { this.state.lista }                                     
+                    <SeriesConcluidas lista = { this.state.lista }                                     
                                     pendente = { this.pendente }
                                     concluido = { this.concluido }                              
                     />
