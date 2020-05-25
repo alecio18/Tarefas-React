@@ -96,14 +96,18 @@ export default class Series extends Component {
          /* tarefas concluidas percentagem */
 
          let contConcluidas = 0
+         let contTotal = 0
 
          Object.entries(this.state.lista).forEach(([, valor]) => {
-             if(valor.completo === true){
+             if(valor.completo === true && valor.tipo === 'serie'){
                  contConcluidas += 1
+             }
+             if(valor.tipo === 'serie'){
+                 contTotal += 1
              }
          })        
          
-         const totalConcluido = ((contConcluidas * 100)/this.state.lista.length)
+         const totalConcluido = ((contConcluidas * 100)/contTotal)
          
          /** final da porcentagem */ 
 
