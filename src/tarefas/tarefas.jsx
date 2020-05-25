@@ -8,8 +8,6 @@ import TarefasLista from './tarefasLista'
 
 const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 
-//const URL = 'http://localhost:4010/api/tarefas'
-
 export default class Tarefas extends Component {
     
     //amarrando this para o componente
@@ -97,14 +95,18 @@ export default class Tarefas extends Component {
          /* tarefas concluidas percentagem */
 
          let contConcluidas = 0
+         let contTotal = 0
 
          Object.entries(this.state.lista).forEach(([, valor]) => {
-             if(valor.completo === true){
-                 contConcluidas += 1
+             if(valor.completo === true && valor.tipo === ''){
+                 contConcluidas += 1                 
+             }
+             if(valor.tipo === ''){
+                 contTotal += 1
              }
          })        
          
-         const totalConcluido = ((contConcluidas * 100)/this.state.lista.length)
+         const totalConcluido = ((contConcluidas * 100)/contTotal)
          
          /** final da porcentagem */ 
 
