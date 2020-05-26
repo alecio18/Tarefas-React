@@ -20,6 +20,7 @@ export default props => {
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
                 <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>
+                <td>{tarefa.dataConclusao  ? moment(tarefa.dataConclusao).format('DD/MM/YYYY') : 'sem data' }</td>
                 <td>
 
                    
@@ -40,6 +41,7 @@ export default props => {
                 <tr>
                     <th>Descrição</th>
                     <th>Data</th>
+                    <th>Conclusão</th>
                     <th className='acoesTabela'>Ações</th>
                 </tr>
             </thead>

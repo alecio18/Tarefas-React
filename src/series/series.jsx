@@ -78,9 +78,10 @@ export default class Series extends Component {
     }
 
     concluido(tarefa){
-        axios.put(`${URL}/${tarefa._id}`, { ...tarefa, completo: true})
-            .then(resp => this.atualizar(this.state.descricao))
-        
+        var data = new Date()
+        var now = data.getTime();
+        axios.put(`${URL}/${tarefa._id}`, { ...tarefa, completo: true, dataConclusao: now })
+            .then(resp => this.atualizar(this.state.descricao))                  
     }
 
     pesquisar(){
