@@ -15,9 +15,9 @@ export default props => {
         return tarefasLista.map(tarefa => (            
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
-                <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>
+                <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>                
+                <td>{moment(tarefa.dataCriacao).add(7, 'days') < moment()  ? <b><font color="#CD0000"> {moment(tarefa.dataCriacao).add(7, 'days').format('DD/MM/YYYY')} </font></b> : 'Menor'}</td>                
                 <td>
-
                    
                     <Botao style='success' icon='check' hide={tarefa.completo}
                         onClick={() => props.concluido(tarefa)} />
@@ -38,6 +38,7 @@ export default props => {
                 <tr>
                     <th>Descrição</th>
                     <th>Data</th>
+                    <th>Prazo</th>
                     <th className='acoesTabela'>Ações</th>
                 </tr>
             </thead>
