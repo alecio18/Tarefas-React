@@ -16,7 +16,7 @@ export default props => {
             <tr key={ tarefa._id }>
                 <td className={tarefa.completo ? 'concluido' : '' }>{tarefa.descricao}</td>
                 <td>{moment(tarefa.dataCriacao).format('DD/MM/YYYY')}</td>                
-                <td>{moment(tarefa.dataCriacao).add(7, 'days') < moment()  ? <b><font color="#CD0000"> {moment(tarefa.dataCriacao).add(7, 'days').format('DD/MM/YYYY')} </font></b> : 'Menor'}</td>                
+                <td>{moment(tarefa.dataCriacao).add(7, 'days') < moment()  ? <b><font color="#CD0000"> {moment(tarefa.dataCriacao).add(7, 'days').format('DD/MM/YYYY')} </font></b> : moment(tarefa.dataCriacao).add(7, 'days').format('DD/MM/YYYY') }</td>                
                 <td>
                    
                     <Botao style='success' icon='check' hide={tarefa.completo}
