@@ -106,14 +106,15 @@ export default class Series extends Component {
              if(valor.tipo === 'serie'){
                  contTotal += 1
              }
+             
          })        
          
-         const totalConcluido = ((contConcluidas * 100)/contTotal)
-         
+         let totalConcluido = ((contConcluidas * 100)/contTotal)
+        
          /** final da porcentagem */ 
 
-        return (
-            totalConcluido.toFixed(2) + ' % '
+        return ( 
+                isNaN(totalConcluido) ? 'Sem Registros' : totalConcluido.toFixed(2) + ' % '          
         )
 
     }

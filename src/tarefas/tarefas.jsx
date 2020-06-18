@@ -110,8 +110,8 @@ export default class Tarefas extends Component {
          
          /** final da porcentagem */ 
 
-        return (
-            totalConcluido.toFixed(2) + ' % '
+        return ( 
+            isNaN(totalConcluido) ? 'Sem Registros' : totalConcluido.toFixed(2) + ' % '          
         )
 
     }
