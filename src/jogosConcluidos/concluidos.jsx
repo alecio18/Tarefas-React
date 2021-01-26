@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import MangasConcluidos from './mangasConcluidos'
+import JogosConcluidos from './jogosConcluidos'
 
 
 //const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 const URL = 'http://localhost:4010/api/tarefas'
 
-export default class Mangas extends Component {
+export default class Jogos extends Component {
     
     //amarrando this para o componente
 
@@ -53,7 +53,7 @@ export default class Mangas extends Component {
     render() {
         return ( 
                 <div>           
-                    <MangasConcluidos lista = { this.state.lista }                                     
+                    <JogosConcluidos lista = { this.state.lista }                                     
                                     pendente = { this.pendente }
                                     concluido = { this.concluido }                              
                     />

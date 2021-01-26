@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import PageHeader from '../template/pageHeader'
-import MangasForm from './mangasForm'
-import MangasLista from './mangasLista'
-
+import JogosForm from './jogosForm'
+import JogosLista from './jogosLista'
 
 //const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
 const URL = 'http://localhost:4010/api/tarefas'
 
-export default class Mangas extends Component {
+export default class Jogos extends Component {
     
     //amarrando this para o componente
 
@@ -48,7 +47,7 @@ export default class Mangas extends Component {
     
     adicionar() {
        const descricao = this.state.descricao
-       const tipo = 'manga'
+       const tipo = 'jogos'
         axios.post(URL, { descricao, tipo })
             .then(resp => this.atualizar())
             .catch((e) => {
@@ -79,9 +78,8 @@ export default class Mangas extends Component {
     }
 
     concluido(tarefa){
-        var data = new Date()        
+        var data = new Date()
         var now = data.getTime();
-        console.log(now)
         axios.put(`${URL}/${tarefa._id}`, { ...tarefa, completo: true, dataConclusao: now })
             .then(resp => this.atualizar(this.state.descricao))                  
     }
@@ -102,21 +100,22 @@ export default class Mangas extends Component {
          let contTotal = 0
 
          Object.entries(this.state.lista).forEach(([, valor]) => {
-             if(valor.completo === true && valor.tipo === 'manga'){
+             if(valor.completo === true && valor.tipo === 'jogos'){
                  contConcluidas += 1
              }
-             if(valor.tipo === 'manga'){
+             if(valor.tipo === 'jogos'){
                  contTotal += 1
              }
+             
          })        
          
-         const totalConcluido = ((contConcluidas * 100)/contTotal)
-         
+         let totalConcluido = ((contConcluidas * 100)/contTotal)
+        
          /** final da porcentagem */ 
 
-         return ( 
-            isNaN(totalConcluido) ? 'Sem Registros' : totalConcluido.toFixed(2) + ' % '          
-         )
+        return ( 
+                isNaN(totalConcluido) ? 'Sem Registros' : totalConcluido.toFixed(2) + ' % '          
+        )
 
     }
 
@@ -132,32 +131,27 @@ export default class Mangas extends Component {
         return lista       
         
     }
- 
-
     render() {
         return ( 
                 <div>                           
                     
-                    <PageHeader nome='Mangas' small ='Cadastro' total={this.concluidosTotal()}/>
+                    <PageHeader nome='Jogos' small ='Cadastro' total={this.concluidosTotal()}/>
                     
                     <div className='col-xs-12'>
                     <br />
-                        <MangasForm descricao = {this.state.descricao}
+                        <JogosForm descricao = {this.state.descricao}
                             adicionar={this.adicionar}
                             alterar={this.alterar} 
                             pesquisar = { this.pesquisar }
                             limpar = { this.limpar }   
                         />
                     </div>                    
-                    <MangasLista lista = { this.listaNaoConcluida() }
+                    <JogosLista lista = { this.listaNaoConcluida() }
                                     remover = { this.remover } 
                                     pendente = { this.pendente }
                                     concluido = { this.concluido }                              
                     />
                 </div>
         )
-               
-           
-        
     }
 }

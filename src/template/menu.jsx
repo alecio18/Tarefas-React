@@ -17,8 +17,10 @@ export default props => (
                     <li><a href='#/series'>Series</a></li>
                     <li><a href='#/seriesConcluidas'>Series Concluídas</a></li>
                     <li><a href='#/mangas'>Mangá</a></li>
-                    <li><a href='#/mangasConcluidos'>M. Concluídos</a></li> 
-                    <li><a href='#/sobre'>Sobre</a></li>                    
+                    <li><a href='#/mangasConcluidos'>M. Concluídos</a></li>
+                    <li><a href='#/jogos'>Jogos</a></li>
+                    <li><a href='#/jogosConcluidos'>J/Comple</a></li> 
+                    {/* }<li><a href='#/sobre'>Sobre</a></li> */ }                  
                 </ul>
             </div>
         </div>

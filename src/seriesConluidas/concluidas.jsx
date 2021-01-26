@@ -4,7 +4,8 @@ import axios from 'axios'
 import SeriesConcluidas from './seriesConcluidas'
 
 
-const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
+//const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
+const URL = 'http://localhost:4010/api/tarefas'
 
 export default class Series extends Component {
     

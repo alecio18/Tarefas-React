@@ -11,7 +11,7 @@ export default props => {
        
         
         const listaFiltrada = lista.filter((finalizado) => {
-            return finalizado.completo === true && finalizado.tipo === 'manga'            
+            return finalizado.completo === true && finalizado.tipo === 'jogos'            
         })
 
         return listaFiltrada.map(tarefa => (             

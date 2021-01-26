@@ -5,7 +5,9 @@ import PageHeader from '../template/pageHeader'
 import TarefasForm from './tarefasForm'
 import TarefasLista from './tarefasLista'
 
-const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
+//const URL = 'http://ec2-54-94-166-33.sa-east-1.compute.amazonaws.com:4010/api/tarefas'
+
+const URL = 'http://localhost:4010/api/tarefas'
 
 export default class Tarefas extends Component {
     
@@ -78,6 +80,7 @@ export default class Tarefas extends Component {
     concluido(tarefa){
         var data = new Date()
         var now = data.getTime();
+        console.log(tarefa._id)
         axios.put(`${URL}/${tarefa._id}`, { ...tarefa, completo: true, dataConclusao: now })
             .then(resp => this.atualizar(this.state.descricao))                   
     }
